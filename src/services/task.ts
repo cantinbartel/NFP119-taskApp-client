@@ -1,6 +1,5 @@
 import { Task } from '../types/task';
 
-// export const getTasks2 = async(): Promise<Task[]> => await (await fetch(`/api/tasks`)).json();
 
 export const getTasks = async() => {
     try {
@@ -12,8 +11,6 @@ export const getTasks = async() => {
     }
 };
 
-// export const getTaskById2 = async(id: string): Promise<Task> => await (await fetch(`/api/tasks/${id}`)).json();
-
 export const getTaskById = async(id: string) => {
     try {
         const response = await fetch(`/api/tasks/${id}`);
@@ -22,39 +19,27 @@ export const getTaskById = async(id: string) => {
     } catch(error) {
         console.log(error);
     }
-    await (await fetch(`/api/users/${id}`)).json()
+};
+
+export const getTasksByUserId = async(userId: string) => {
+    try {
+        const response = await fetch(`/api/tasks/${userId}/user`)
+        const tasks = await response.json();
+        return tasks;
+    } catch(error) {
+        console.log(error);
+    }
 };
 
 export const deleteTask = async(id: string) => {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-    };
     try {
-        const response = await fetch(`/api/users/${id}`, requestOptions);
+        const response = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
         const deletedTask = await response.json();
         return deletedTask;
     } catch(error) {
         console.log(error)
     }
 };
-
-// export const addTask2 = async(title: string, userId: string, description?: string) => {
-//     const newTask: Task = { title, description, userId }
-//     try {
-//         const res = await fetch(`/api/tasks`, {
-//             method: 'POST',
-//             body: JSON.stringify(newTask),
-//             headers: {
-//                 'Content-type': 'application/json'
-//             }
-//         })
-//         const data: Promise<Task> = res.json()
-//         return data
-//     } catch(error) {
-//         console.log(error)
-//     }
-// };
 
 export const addTask = async(task: Task) => {
     const requestOptions = {
@@ -66,6 +51,22 @@ export const addTask = async(task: Task) => {
         const response = await fetch(`/api/tasks`, requestOptions);
         const taskSaved = await response.json();
         return taskSaved;
+    } catch(error) {
+        console.log(error)
+    }
+};
+
+export const updateTask = async(updatedTask: Task, id: string | undefined) => {
+    console.log('Task in UpdateTask', updatedTask)
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedTask)
+    };
+    try {
+        const response = await fetch(`/api/tasks/${id}`, requestOptions);
+        const updatedTask = await response.json();
+        return updatedTask;
     } catch(error) {
         console.log(error)
     }

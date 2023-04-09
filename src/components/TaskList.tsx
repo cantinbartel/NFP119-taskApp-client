@@ -1,14 +1,28 @@
 import React from 'react';
 import { Task } from '../types/task';
 import { Link } from 'react-router-dom';
-import { MdDelete, MdEdit, MdAddTask } from 'react-icons/md'
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { deleteTask } from '../services/task';
 
 type TaskListProps = {
   tasks: Task[]
+  selectedTask?: Task
+  select: (selectedTask: Task) => void
   edit: () => void
+  handleRefresh: () => void
 }
 
-const TaskList = ({ tasks, edit }: TaskListProps) => {
+const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskListProps) => {
+  const handleSelection = (task: Task) => {
+    select(task);
+    edit();
+  };
+  const handleDelete = async(task: Task) => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      await deleteTask(task._id!)
+      handleRefresh()
+    }
+  }
   return (
     <table className="w-full mt-10">
       <thead className="w-full border border-gray-200">
@@ -27,20 +41,16 @@ const TaskList = ({ tasks, edit }: TaskListProps) => {
               <Link to={`/tasks/${task._id}`}>
                 <button className="px-2 py-1 mx-auto cursor-pointer">Details</button>
               </Link>
-              {/* <button 
-                  className="px-2 py-1 mx-auto cursor-pointer"
-                  onClick={() => navigate(`/tasks/${task._id}`)}>Details</button> */}
-            </td>
-            <td>
-              {/* <button className='mt-2 text-sky-600 hover:text-sky-700' onClick={() => navigate(`/tasks/${task._id}/edit`)}>{<MdEdit />}</button> */}
-                <button 
-                  className='mt-2 text-sky-600 hover:text-sky-700' 
-                  onClick={edit}>{<MdEdit />}</button>
             </td>
             <td>
               <button 
                 className='mt-2 text-sky-600 hover:text-sky-700' 
-                onClick={() => window.confirm('Are you sure you want to delete this task?')}>{<MdDelete />}</button>    
+                onClick={() => handleSelection(task)}>{<MdEdit />}</button>
+            </td>
+            <td>
+              <button 
+                className='mt-2 text-sky-600 hover:text-sky-700' 
+                onClick={() => handleDelete(task)}>{<MdDelete />}</button>    
             </td>
           </tr>
         ))}

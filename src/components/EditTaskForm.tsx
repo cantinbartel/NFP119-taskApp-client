@@ -7,26 +7,28 @@ import { User } from '../types/user';
 import { Task } from '../types/task';
 import { RefreshProps } from '../types/props'
 import { MdRefresh } from 'react-icons/md';
+import { updateTask } from '../services/task';
 
 type TaskFormProps = {
   user: any
+  task?: Task
   refresh: number
   setRefresh: (refresh: number) => void
   close: () => void
 }
 
-const EditTaskForm = ({ user, refresh, setRefresh, close }: TaskFormProps) => {
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+const EditTaskForm = ({ user, task, refresh, setRefresh, close }: TaskFormProps) => {
+  const [title, setTitle] = useState<string>(task?.title || '');
+  const [description, setDescription] = useState<string>(task?.description || '');
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (user) {
-      addTask({ title, description, user: user._id })
-        .then(() => setRefresh(refresh+1))
-    }
-    close();
+    if(!task) return
+    updateTask({ title, description, user: user._id }, task._id)
+      .then(() => setRefresh(refresh+1))
+    close()
   };
+  
   return (
     <form onSubmit={handleSubmit}>
       <label
@@ -48,10 +50,7 @@ const EditTaskForm = ({ user, refresh, setRefresh, close }: TaskFormProps) => {
         placeholder="Enter description"
         value={description}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)} />
-        {/* <select>
-          <option value=""></option>
-        </select> */}
-      <Button className="mt-4">Create</Button>
+      <Button className="mt-4">Update</Button>
     </form>
   )
 };
