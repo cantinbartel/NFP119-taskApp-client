@@ -1,4 +1,9 @@
 export type DrawerButtonProps = {
-    menuOpen: boolean,
+    menuOpen: boolean
     setMenuOpen: (menuOpen: boolean) => void
+}
+
+export type RefreshProps = {
+    refresh: number
+    setRefresh: (refresh: number) => void
 }

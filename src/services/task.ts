@@ -1,17 +1,50 @@
 import { Task } from '../types/task';
 
-export const getTasks = async(): Promise<Task[]> => await (await fetch(`/api/tasks`)).json();
+// export const getTasks2 = async(): Promise<Task[]> => await (await fetch(`/api/tasks`)).json();
 
-export const getTaskById = async(id: string): Promise<Task> => await (await fetch(`/api/users/${id}`)).json();
+export const getTasks = async() => {
+    try {
+        const response = await fetch(`/api/tasks`);
+        const tasks = await response.json();
+        return tasks;
+    } catch(error) {
+        console.log(error);
+    }
+};
 
-export const deleteTask = async(id: string): Promise<void> => { await fetch(`/api/users/${id}`, { method: 'DELETE' }) };
+// export const getTaskById2 = async(id: string): Promise<Task> => await (await fetch(`/api/tasks/${id}`)).json();
 
-// export const addTask = async(title: string, userId: string, description?: string) => {
-//     const userInfo: Task = { title, description, userId }
+export const getTaskById = async(id: string) => {
+    try {
+        const response = await fetch(`/api/tasks/${id}`);
+        const task = await response.json();
+        return task;
+    } catch(error) {
+        console.log(error);
+    }
+    await (await fetch(`/api/users/${id}`)).json()
+};
+
+export const deleteTask = async(id: string) => {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    };
+    try {
+        const response = await fetch(`/api/users/${id}`, requestOptions);
+        const deletedTask = await response.json();
+        return deletedTask;
+    } catch(error) {
+        console.log(error)
+    }
+};
+
+// export const addTask2 = async(title: string, userId: string, description?: string) => {
+//     const newTask: Task = { title, description, userId }
 //     try {
-//         const res = await fetch(`/api/users`, {
+//         const res = await fetch(`/api/tasks`, {
 //             method: 'POST',
-//             body: JSON.stringify(userInfo),
+//             body: JSON.stringify(newTask),
 //             headers: {
 //                 'Content-type': 'application/json'
 //             }
@@ -22,3 +55,18 @@ export const deleteTask = async(id: string): Promise<void> => { await fetch(`/ap
 //         console.log(error)
 //     }
 // };
+
+export const addTask = async(task: Task) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task)
+    };
+    try {
+        const response = await fetch(`/api/tasks`, requestOptions);
+        const taskSaved = await response.json();
+        return taskSaved;
+    } catch(error) {
+        console.log(error)
+    }
+};

@@ -15,9 +15,10 @@ const Drawer = ({ menuOpen, setMenuOpen }: DrawerButtonProps) => {
     { title: 'Add Task', icon: <MdAddTask/>, link: '/add-task' },
   ]
   return (
-    <div className={`fixed bg-sky-700 opacity-40 text-white text-3xl pl-32 h-screen pt-24 w-1/4 left-0 ${menuOpen ? 'transition overscroll-none' : '-translate-x-full transition'} cursor-pointer`}>
-        {options.map(opt => (
+    <div className={`fixed bg-sky-700 opacity-40 text-white text-3xl pl-32 h-screen pt-24 w-1/4 left-0 ${menuOpen ? 'transition overscroll-none' : '-translate-x-full transition'} cursor-pointer z-20`}>
+        {options.map((opt, i) => (
           <p 
+            key={i}
             className='mt-8 flex hover:text-slate-300'
             onClick={() => {navigate(opt.link); setMenuOpen(false)}}>
             <a className='mr-3'>{opt.icon}</a>{opt.title}</p>
