@@ -6,26 +6,41 @@ import { addTask } from '../services/task';
 import { User } from '../types/user';
 import { RefreshProps } from '../types/props'
 import { MdRefresh } from 'react-icons/md';
+import { getUsers, getUserById } from '../services/user';
 
 type TaskFormProps = {
-  user: any
+  user?: any
   refresh: number
   setRefresh: (refresh: number) => void
   close: () => void
 }
 
-const TaskForm = ({ user, refresh, setRefresh, close }: TaskFormProps) => {
+const TaskForm = ({ user: usr, refresh, setRefresh, close }: TaskFormProps) => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
+  const [userId, setUserId] = useState<string>();
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    if (usr) return
+    getUsers()
+      .then(setUsers)
+      .catch(console.log)
+  }, []);
+
+  useEffect(() => {
+    setUserId(users[0]?._id);
+  }, [users]);
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (user) {
-      addTask({ title, description, user: user._id })
-        .then(() => setRefresh(refresh+1))
-    }
+
+    addTask({ title, description, user: usr ? usr._id : userId })
+      .then(() => setRefresh(refresh+1));
+    
     close();
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <label
@@ -48,10 +63,21 @@ const TaskForm = ({ user, refresh, setRefresh, close }: TaskFormProps) => {
         placeholder="Enter description"
         value={description}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)} />
-        {/* <select>
-          <option value=""></option>
-        </select> */}
-      <Button className="mt-4">Create</Button>
+      { !usr && (
+        <div>
+          <label
+            className="capitalize text-gray-600 font-semibold mr-8"
+            htmlFor="assignee">Assignee</label>
+          <select 
+            className="outline-none"
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => setUserId(e.target.value)}>
+            {users.map(u => (
+              <option key={u._id} value={u._id}>{u.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      <Button className={`${usr ? 'mt-4' : 'mt-8'}`}>Create</Button>
     </form>
   )
 };

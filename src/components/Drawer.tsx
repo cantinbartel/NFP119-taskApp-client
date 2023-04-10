@@ -10,9 +10,7 @@ const Drawer = ({ menuOpen, setMenuOpen }: DrawerButtonProps) => {
   const options = [
     { title: 'Home', icon: <BiHomeAlt2 />, link: '/' },
     { title: 'Users', icon: <BiUser />, link: '/users' },
-    { title: 'Tasks', icon: <MdTaskAlt/>, link: '/tasks' },
-    { title: 'Add User', icon: <BiUserPlus/>, link: '/add-user' },
-    { title: 'Add Task', icon: <MdAddTask/>, link: '/add-task' },
+    { title: 'Tasks', icon: <MdTaskAlt/>, link: '/tasks' }
   ]
   return (
     <div className={`fixed bg-sky-700 opacity-40 text-white text-3xl pl-32 h-screen pt-24 w-1/4 left-0 ${menuOpen ? 'transition overscroll-none' : '-translate-x-full transition'} cursor-pointer z-20`}>

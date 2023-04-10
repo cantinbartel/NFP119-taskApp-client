@@ -10,7 +10,7 @@ import { MdRefresh } from 'react-icons/md';
 import { updateTask } from '../services/task';
 
 type TaskFormProps = {
-  user: any
+  user?: any
   task?: Task
   refresh: number
   setRefresh: (refresh: number) => void
@@ -28,7 +28,7 @@ const EditTaskForm = ({ user, task, refresh, setRefresh, close }: TaskFormProps)
       .then(() => setRefresh(refresh+1))
     close()
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <label
