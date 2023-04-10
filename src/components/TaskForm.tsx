@@ -1,19 +1,16 @@
 import { useState, useEffect, ChangeEvent } from 'react';
 import Button from './Button';
 import { CgAsterisk } from 'react-icons/cg';
-import { useParams } from 'react-router-dom';
 import { addTask } from '../services/task';
 import { User } from '../types/user';
-import { RefreshProps } from '../types/props'
-import { MdRefresh } from 'react-icons/md';
-import { getUsers, getUserById } from '../services/user';
+import { getUsers } from '../services/user';
 
 type TaskFormProps = {
   user?: any
   refresh: number
   setRefresh: (refresh: number) => void
   close: () => void
-}
+};
 
 const TaskForm = ({ user: usr, refresh, setRefresh, close }: TaskFormProps) => {
   const [title, setTitle] = useState<string>('');

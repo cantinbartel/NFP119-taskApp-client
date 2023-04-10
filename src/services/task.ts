@@ -23,7 +23,7 @@ export const getTaskById = async(id: string) => {
 
 export const getTasksByUserId = async(userId: string) => {
     try {
-        const response = await fetch(`/api/tasks/${userId}/user`)
+        const response = await fetch(`/api/tasks/${userId}/user`);
         const tasks = await response.json();
         return tasks;
     } catch(error) {
@@ -37,7 +37,7 @@ export const deleteTask = async(id: string) => {
         const deletedTask = await response.json();
         return deletedTask;
     } catch(error) {
-        console.log(error)
+        console.log(error);
     }
 };
 
@@ -52,12 +52,11 @@ export const addTask = async(task: Task) => {
         const taskSaved = await response.json();
         return taskSaved;
     } catch(error) {
-        console.log(error)
+        console.log(error);
     }
 };
 
 export const updateTask = async(updatedTask: Task, id: string | undefined) => {
-    console.log('Task in UpdateTask', updatedTask)
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -68,6 +67,6 @@ export const updateTask = async(updatedTask: Task, id: string | undefined) => {
         const updatedTask = await response.json();
         return updatedTask;
     } catch(error) {
-        console.log(error)
+        console.log(error);
     }
 };

@@ -1,12 +1,8 @@
-import { useState, useEffect, ChangeEvent } from 'react';
-import Button from './Button';
-import { CgAsterisk } from 'react-icons/cg';
-import { useParams } from 'react-router-dom';
-import { addTask } from '../services/task';
-import { User } from '../types/user';
 import { Task } from '../types/task';
-import { RefreshProps } from '../types/props'
-import { MdRefresh } from 'react-icons/md';
+import { useState, ChangeEvent } from 'react';
+import Button from './Button';
+import Toggle from '../components/Toggle';
+import { CgAsterisk } from 'react-icons/cg';
 import { updateTask } from '../services/task';
 
 type TaskFormProps = {
@@ -15,18 +11,19 @@ type TaskFormProps = {
   refresh: number
   setRefresh: (refresh: number) => void
   close: () => void
-}
+};
 
 const EditTaskForm = ({ user, task, refresh, setRefresh, close }: TaskFormProps) => {
   const [title, setTitle] = useState<string>(task?.title || '');
   const [description, setDescription] = useState<string>(task?.description || '');
+  const [completed, setCompleted] = useState<boolean>(task?.completed || false);
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!task) return
-    updateTask({ title, description, user: user._id }, task._id)
-      .then(() => setRefresh(refresh+1))
-    close()
+    if(!task) return;
+    updateTask({ title, description, user: user._id, completed }, task._id)
+      .then(() => setRefresh(refresh+1));
+    close();
   };
 
   return (
@@ -50,6 +47,8 @@ const EditTaskForm = ({ user, task, refresh, setRefresh, close }: TaskFormProps)
         placeholder="Enter description"
         value={description}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)} />
+      <label className="capitalize text-gray-600 font-semibold">Completed</label>
+      <Toggle enabled={completed} setEnabled={setCompleted} />
       <Button className="mt-4">Update</Button>
     </form>
   )

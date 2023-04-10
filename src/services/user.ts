@@ -19,7 +19,6 @@ export const getUserById = async(id: string) => {
     } catch(error) {
         console.log(error);
     }
-    await (await fetch(`/api/users/${id}`)).json()
 };
 
 export const addUser = async(user: User) => {
@@ -33,6 +32,6 @@ export const addUser = async(user: User) => {
         const userSaved = await response.json();
         return userSaved;
     } catch(error) {
-        console.log(error)
+        console.log(error);
     }
 };

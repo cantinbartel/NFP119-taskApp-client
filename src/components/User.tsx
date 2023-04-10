@@ -1,6 +1,4 @@
-import React from 'react'
-import { User as UserType } from '../types/user' 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 
 export const User = ({ user }: any) => {
@@ -16,6 +14,6 @@ export const User = ({ user }: any) => {
             </div>
         </div>
     )
-}
+};
 
 // export default User

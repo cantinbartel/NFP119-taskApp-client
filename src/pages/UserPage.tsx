@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { getUserById } from '../services/user';
-import { getTasksByUserId } from '../services/task';
 import { User } from '../types/user';
 import { Task } from '../types/task';
+import { getUserById } from '../services/user';
+import { getTasksByUserId } from '../services/task';
 import { useParams } from 'react-router-dom';
-import Button from '../components/Button';
 import TaskList from '../components/TaskList';
-import Modal from '../components/Modal';
 import TaskForm from '../components/TaskForm';
 import EditTaskForm from '../components/EditTaskForm';
+import Modal from '../components/Modal';
+import Button from '../components/Button';
 
 
 const UserPage = () => {
@@ -21,12 +21,13 @@ const UserPage = () => {
     const { id } = useParams();
     useEffect(() => {
         getUserById(id!)
-            .then((usr) => setUser(usr))
+            .then(setUser)
+            .catch(console.log);
     }, []);
     useEffect(() => {
         getTasksByUserId(user?._id!)
-            .then(tsks => setTasks(tsks))
-    }, [user, refresh])
+            .then(tsks => setTasks(tsks));
+    }, [user, refresh]);
     return (
         <div className="mt-16 w-full flex flex-col items-center relative">
             { !addTaskModalOpen && !editTaskModalOpen && (

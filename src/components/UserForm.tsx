@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
-import Button from './Button';
 import { addUser } from '../services/user'
+import Button from './Button';
 import { CgAsterisk } from 'react-icons/cg';
 
 
@@ -13,7 +13,7 @@ const UserForm = () => {
     addUser({name, email})
     setName('');
     setEmail('');
-  } ;
+  };
   return (
     <form onSubmit={handleSubmit}>
       <label

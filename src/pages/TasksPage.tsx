@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Task } from '../types/task';
+import { getTasks } from '../services/task';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import EditTaskForm from '../components/EditTaskForm';
 import Modal from '../components/Modal';
-import { Task } from '../types/task'
-import { getTasks } from '../services/task';
 import Button from '../components/Button';
 
 const TasksPage = () => {
@@ -16,8 +16,8 @@ const TasksPage = () => {
   useEffect(() => {
     getTasks()
         .then(tsks => setTasks(tsks))
-        .catch(err => console.log(err))
-  }, [refresh])
+        .catch(err => console.log(err));
+  }, [refresh]);
   return (
     <div className="mt-16 w-full h-screen flex flex-col items-center relative">
       { !addTaskModalOpen && !editTaskModalOpen && (
@@ -57,4 +57,4 @@ const TasksPage = () => {
   )
 }
 
-export default TasksPage
+export default TasksPage;

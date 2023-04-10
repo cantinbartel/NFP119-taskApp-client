@@ -1,8 +1,7 @@
-import React from 'react';
-import { Task } from '../types/task';
 import { Link } from 'react-router-dom';
-import { MdDelete, MdEdit } from 'react-icons/md';
+import { Task } from '../types/task';
 import { deleteTask } from '../services/task';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 type TaskListProps = {
   tasks: Task[]
@@ -10,7 +9,7 @@ type TaskListProps = {
   select: (selectedTask: Task) => void
   edit: () => void
   handleRefresh: () => void
-}
+};
 
 const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskListProps) => {
   const handleSelection = (task: Task) => {
@@ -22,7 +21,7 @@ const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskList
       await deleteTask(task._id!)
       handleRefresh()
     }
-  }
+  };
   return (
     <table className="w-full mt-10">
       <thead className="w-full border border-gray-200">
@@ -36,7 +35,7 @@ const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskList
         {tasks?.map((task: Task) => (
           <tr key={task._id} className="bg-gray-100 hover:bg-gray-50 border border-gray-200">
             <td className="px-2 text-left py-2 w-1/2">{task.title}</td>
-            <td className="px-2 text-left text-sky-600">completed</td>
+            <td className={`px-2 text-left ${task?.completed ? 'text-sky-600' : 'text-red-400'}`}>{task?.completed ? 'completed' : 'pending'}</td>
             <td className="px-2 text-left">
               <Link to={`/tasks/${task._id}`}>
                 <button className="px-2 py-1 mx-auto cursor-pointer">Details</button>

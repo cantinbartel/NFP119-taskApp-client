@@ -1,17 +1,16 @@
-import { DrawerButtonProps } from '../types/props'
-import { BiUser, BiUserPlus, BiHomeAlt2 } from 'react-icons/bi'
-import { MdTaskAlt, MdAddTask } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
-
+import { DrawerButtonProps } from '../types/props';
+import { useNavigate } from 'react-router-dom';
+import { BiUser } from 'react-icons/bi';
+import { MdTaskAlt } from 'react-icons/md';
 
 
 const Drawer = ({ menuOpen, setMenuOpen }: DrawerButtonProps) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const options = [
-    { title: 'Home', icon: <BiHomeAlt2 />, link: '/' },
+    // { title: 'Home', icon: <BiHomeAlt2 />, link: '/' },
     { title: 'Users', icon: <BiUser />, link: '/users' },
     { title: 'Tasks', icon: <MdTaskAlt/>, link: '/tasks' }
-  ]
+  ];
   return (
     <div className={`fixed bg-sky-700 opacity-40 text-white text-3xl pl-32 h-screen pt-24 w-1/4 left-0 ${menuOpen ? 'transition overscroll-none' : '-translate-x-full transition'} cursor-pointer z-20`}>
         {options.map((opt, i) => (
@@ -23,6 +22,6 @@ const Drawer = ({ menuOpen, setMenuOpen }: DrawerButtonProps) => {
         ))}
     </div>
   )
-}
+};
 
-export default Drawer
+export default Drawer;
