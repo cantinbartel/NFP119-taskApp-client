@@ -19,15 +19,18 @@ const UserPage = () => {
     const [addTaskModalOpen, setAddTaskModalOpen] = useState(false);
     const [editTaskModalOpen, setEditTaskModalOpen] = useState(false);
     const { id } = useParams();
+
     useEffect(() => {
         getUserById(id!)
             .then(setUser)
             .catch(console.log);
     }, []);
     useEffect(() => {
-        getTasksByUserId(user?._id!)
+        if(!user) return
+        getTasksByUserId(user._id!)
             .then(tsks => setTasks(tsks));
     }, [user, refresh]);
+
     return (
         <div className="mt-16 w-full flex flex-col items-center relative">
             { !addTaskModalOpen && !editTaskModalOpen && (
@@ -60,7 +63,7 @@ const UserPage = () => {
                     isOpen={editTaskModalOpen}
                     onClose={() => setEditTaskModalOpen(false)}
                     title='Edit task'>
-                    <EditTaskForm user={user} task={selectedTask} refresh={refresh} setRefresh={setRefresh} close={() => setEditTaskModalOpen(false)} />
+                    <EditTaskForm task={selectedTask} refresh={refresh} setRefresh={setRefresh} close={() => setEditTaskModalOpen(false)} />
                 </Modal>
             )}
         </div>

@@ -15,7 +15,7 @@ import './assets/css/index.css';
 function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     return (
-        <div id='page-container'>
+        <div id="page-container">
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             <Drawer menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             <Routes>

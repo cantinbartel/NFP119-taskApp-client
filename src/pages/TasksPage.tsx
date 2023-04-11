@@ -13,13 +13,15 @@ const TasksPage = () => {
   const [refresh, setRefresh] = useState<number>(0);
   const [addTaskModalOpen, setAddTaskModalOpen] = useState(false);
   const [editTaskModalOpen, setEditTaskModalOpen] = useState(false);
+
   useEffect(() => {
     getTasks()
         .then(tsks => setTasks(tsks))
         .catch(err => console.log(err));
   }, [refresh]);
+
   return (
-    <div className="mt-16 w-full h-screen flex flex-col items-center relative">
+    <div className="mt-16 w-full flex flex-col items-center">
       { !addTaskModalOpen && !editTaskModalOpen && (
         <>
           <Button className='absolute right-20' onClick={() => setAddTaskModalOpen(true)}>Add Task</Button>
@@ -50,6 +52,7 @@ const TasksPage = () => {
           isOpen={editTaskModalOpen}
           onClose={() => setEditTaskModalOpen(false)}
           title='Edit task'>
+          {/* <EditTaskForm user={selectedTask?.user?.name} task={selectedTask} refresh={refresh} setRefresh={setRefresh} close={() => setEditTaskModalOpen(false)} /> */}
           <EditTaskForm task={selectedTask} refresh={refresh} setRefresh={setRefresh} close={() => setEditTaskModalOpen(false)} />
         </Modal>
       )}

@@ -15,6 +15,13 @@ const TaskPage = () => {
       .catch(console.log);
   }, []);
 
+  useEffect(() => {
+    if(!id) return; 
+    getTaskById(id)
+      .then(result => console.log(result))
+      .catch(console.log);
+  }, []);
+  
   return (
     <div className='w-full flex justify-center'>
       { task ? (

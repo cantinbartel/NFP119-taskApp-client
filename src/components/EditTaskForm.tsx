@@ -1,19 +1,19 @@
 import { Task } from '../types/task';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import Button from './Button';
 import Toggle from '../components/Toggle';
 import { CgAsterisk } from 'react-icons/cg';
 import { updateTask } from '../services/task';
 
 type TaskFormProps = {
-  user?: any
+  // user?: any
   task?: Task
   refresh: number
   setRefresh: (refresh: number) => void
   close: () => void
 };
 
-const EditTaskForm = ({ user, task, refresh, setRefresh, close }: TaskFormProps) => {
+const EditTaskForm = ({ task, refresh, setRefresh, close }: TaskFormProps) => {
   const [title, setTitle] = useState<string>(task?.title || '');
   const [description, setDescription] = useState<string>(task?.description || '');
   const [completed, setCompleted] = useState<boolean>(task?.completed || false);
@@ -21,7 +21,7 @@ const EditTaskForm = ({ user, task, refresh, setRefresh, close }: TaskFormProps)
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(!task) return;
-    updateTask({ title, description, user: user._id, completed }, task._id)
+    updateTask({ title, description, user: task?.user, completed }, task._id)
       .then(() => setRefresh(refresh+1));
     close();
   };

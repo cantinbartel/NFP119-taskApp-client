@@ -16,12 +16,14 @@ const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskList
     select(task);
     edit();
   };
+
   const handleDelete = async(task: Task) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       await deleteTask(task._id!)
       handleRefresh()
     }
   };
+  
   return (
     <table className="w-full mt-10">
       <thead className="w-full border border-gray-200">
