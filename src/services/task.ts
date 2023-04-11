@@ -1,6 +1,6 @@
 import { Task } from '../types/task';
 
-
+/* GET ALL USERS */
 export const getTasks = async() => {
     try {
         const response = await fetch(`/api/tasks`);
@@ -11,6 +11,7 @@ export const getTasks = async() => {
     }
 };
 
+/* GET USER BY ID */
 export const getTaskById = async(id: string) => {
     try {
         const response = await fetch(`/api/tasks/${id}`);
@@ -21,6 +22,7 @@ export const getTaskById = async(id: string) => {
     }
 };
 
+/* GET TASKS RELATED TO A USER */
 export const getTasksByUserId = async(userId: string) => {
     try {
         const response = await fetch(`/api/tasks/${userId}/user`);
@@ -31,6 +33,7 @@ export const getTasksByUserId = async(userId: string) => {
     }
 };
 
+/* DELETE TASK */
 export const deleteTask = async(id: string) => {
     try {
         const response = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
@@ -41,6 +44,7 @@ export const deleteTask = async(id: string) => {
     }
 };
 
+/* POST - ADD TASK */
 export const addTask = async(task: Task) => {
     const requestOptions = {
         method: 'POST',
@@ -56,6 +60,7 @@ export const addTask = async(task: Task) => {
     }
 };
 
+/* PUT - UPDATE TASK */
 export const updateTask = async(updatedTask: Task, id: string | undefined) => {
     const requestOptions = {
         method: 'PUT',

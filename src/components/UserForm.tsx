@@ -9,12 +9,12 @@ const UserForm = () => {
   const [email, setEmail] = useState<string>('');
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); 
     addUser({name, email})
     setName('');
     setEmail('');
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <label

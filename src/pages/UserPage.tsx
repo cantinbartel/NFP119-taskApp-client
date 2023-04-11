@@ -20,11 +20,14 @@ const UserPage = () => {
     const [editTaskModalOpen, setEditTaskModalOpen] = useState(false);
     const { id } = useParams();
 
+    /* GET USER WHEN COMPONENT IS MOUNTING */
     useEffect(() => {
         getUserById(id!)
             .then(setUser)
             .catch(console.log);
     }, []);
+
+    /* GET TASKS RELATED TO THE USER ONCE THE USER IS FOUND AND EVERY RENDER UPDATED TASKS IN REAL TIME */
     useEffect(() => {
         if(!user) return
         getTasksByUserId(user._id!)

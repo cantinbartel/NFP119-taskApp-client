@@ -11,6 +11,7 @@ const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [addUserModal, setAddUserModal] = useState(false);
 
+  /* GET USERS WHEN COMPONENT IS MOUNTING */
   useEffect(() => {
     getUsers()
       .then(setUsers)

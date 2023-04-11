@@ -14,6 +14,7 @@ const TasksPage = () => {
   const [addTaskModalOpen, setAddTaskModalOpen] = useState(false);
   const [editTaskModalOpen, setEditTaskModalOpen] = useState(false);
 
+  /* GET TASKS WHEN COMPONENT IS MOUNTING AND EVERY TIME THE TASKS ARE UPDATED */
   useEffect(() => {
     getTasks()
         .then(tsks => setTasks(tsks))
@@ -52,7 +53,6 @@ const TasksPage = () => {
           isOpen={editTaskModalOpen}
           onClose={() => setEditTaskModalOpen(false)}
           title='Edit task'>
-          {/* <EditTaskForm user={selectedTask?.user?.name} task={selectedTask} refresh={refresh} setRefresh={setRefresh} close={() => setEditTaskModalOpen(false)} /> */}
           <EditTaskForm task={selectedTask} refresh={refresh} setRefresh={setRefresh} close={() => setEditTaskModalOpen(false)} />
         </Modal>
       )}

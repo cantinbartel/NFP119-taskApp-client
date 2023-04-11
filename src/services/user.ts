@@ -1,6 +1,6 @@
 import { User } from '../types/user';
 
-
+/* GET ALL USERS */
 export const getUsers = async() => {
     try {
         const response = await fetch(`/api/users`);
@@ -11,6 +11,7 @@ export const getUsers = async() => {
     }
 };
 
+/* GET USER BY ID */
 export const getUserById = async(id: string) => {
     try {
         const response = await fetch(`/api/users/${id}`);
@@ -21,6 +22,7 @@ export const getUserById = async(id: string) => {
     }
 };
 
+/* POST - ADD USER */
 export const addUser = async(user: User) => {
     const requestOptions = {
         method: 'POST',
