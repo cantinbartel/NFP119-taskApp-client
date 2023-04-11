@@ -4,7 +4,7 @@ import { Task } from '../types/task';
 export const getTasks = async() => {
     try {
         const response = await fetch(`/api/tasks`);
-        const tasks = await response.json();
+        const tasks = response.json();
         return tasks;
     } catch(error) {
         console.log(error);
@@ -14,7 +14,7 @@ export const getTasks = async() => {
 export const getTaskById = async(id: string) => {
     try {
         const response = await fetch(`/api/tasks/${id}`);
-        const task = await response.json();
+        const task = response.json();
         return task;
     } catch(error) {
         console.log(error);
@@ -24,7 +24,7 @@ export const getTaskById = async(id: string) => {
 export const getTasksByUserId = async(userId: string) => {
     try {
         const response = await fetch(`/api/tasks/${userId}/user`);
-        const tasks = await response.json();
+        const tasks = response.json();
         return tasks;
     } catch(error) {
         console.log(error);
@@ -34,7 +34,7 @@ export const getTasksByUserId = async(userId: string) => {
 export const deleteTask = async(id: string) => {
     try {
         const response = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
-        const deletedTask = await response.json();
+        const deletedTask = response.json();
         return deletedTask;
     } catch(error) {
         console.log(error);
@@ -49,7 +49,7 @@ export const addTask = async(task: Task) => {
     };
     try {
         const response = await fetch(`/api/tasks`, requestOptions);
-        const taskSaved = await response.json();
+        const taskSaved = response.json();
         return taskSaved;
     } catch(error) {
         console.log(error);
@@ -64,7 +64,7 @@ export const updateTask = async(updatedTask: Task, id: string | undefined) => {
     };
     try {
         const response = await fetch(`/api/tasks/${id}`, requestOptions);
-        const updatedTask = await response.json();
+        const updatedTask = response.json();
         return updatedTask;
     } catch(error) {
         console.log(error);
