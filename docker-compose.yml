@@ -1,0 +1,13 @@
+version: "3.10"
+services:
+  taskapp-client:
+    build: .
+    image: taskapp-client
+    container_name: taskapp_client_c
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    stdin_open: true
+    

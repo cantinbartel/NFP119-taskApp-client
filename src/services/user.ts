@@ -1,9 +1,10 @@
 import { User } from '../types/user';
+import { backendUrl } from '../utils';
 
 /* GET ALL USERS */
 export const getUsers = async() => {
     try {
-        const response = await fetch(`/api/users`);
+        const response = await fetch(`${backendUrl}/api/users`);
         const users = response.json();
         return users;
     } catch(error) {
@@ -14,7 +15,7 @@ export const getUsers = async() => {
 /* GET USER BY ID */
 export const getUserById = async(id: string) => {
     try {
-        const response = await fetch(`/api/users/${id}`);
+        const response = await fetch(`${backendUrl}/api/users/${id}`);
         const user = response.json();
         return user;
     } catch(error) {
@@ -30,7 +31,7 @@ export const addUser = async(user: User) => {
         body: JSON.stringify(user)
     };
     try {
-        const response = await fetch(`/api/users`, requestOptions);
+        const response = await fetch(`${backendUrl}/api/users`, requestOptions);
         const userSaved = response.json();
         return userSaved;
     } catch(error) {

@@ -1,9 +1,10 @@
 import { Task } from '../types/task';
+import { backendUrl } from '../utils';
 
 /* GET ALL USERS */
 export const getTasks = async() => {
     try {
-        const response = await fetch(`/api/tasks`);
+        const response = await fetch(`${backendUrl}/api/tasks`);
         const tasks = response.json();
         return tasks;
     } catch(error) {
@@ -14,7 +15,7 @@ export const getTasks = async() => {
 /* GET USER BY ID */
 export const getTaskById = async(id: string) => {
     try {
-        const response = await fetch(`/api/tasks/${id}`);
+        const response = await fetch(`${backendUrl}/api/tasks/${id}`);
         const task = response.json();
         return task;
     } catch(error) {
@@ -25,7 +26,7 @@ export const getTaskById = async(id: string) => {
 /* GET TASKS RELATED TO A USER */
 export const getTasksByUserId = async(userId: string) => {
     try {
-        const response = await fetch(`/api/tasks/${userId}/user`);
+        const response = await fetch(`${backendUrl}/api/tasks/${userId}/user`);
         const tasks = response.json();
         return tasks;
     } catch(error) {
@@ -36,7 +37,7 @@ export const getTasksByUserId = async(userId: string) => {
 /* DELETE TASK */
 export const deleteTask = async(id: string) => {
     try {
-        const response = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${backendUrl}/api/tasks/${id}`, { method: 'DELETE' });
         const deletedTask = response.json();
         return deletedTask;
     } catch(error) {
@@ -52,7 +53,7 @@ export const addTask = async(task: Task) => {
         body: JSON.stringify(task)
     };
     try {
-        const response = await fetch(`/api/tasks`, requestOptions);
+        const response = await fetch(`${backendUrl}/api/tasks`, requestOptions);
         const taskSaved = response.json();
         return taskSaved;
     } catch(error) {
@@ -68,7 +69,7 @@ export const updateTask = async(updatedTask: Task, id: string | undefined) => {
         body: JSON.stringify(updatedTask)
     };
     try {
-        const response = await fetch(`/api/tasks/${id}`, requestOptions);
+        const response = await fetch(`${backendUrl}/api/tasks/${id}`, requestOptions);
         const updatedTask = response.json();
         return updatedTask;
     } catch(error) {
