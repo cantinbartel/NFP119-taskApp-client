@@ -24,10 +24,9 @@ const TasksPage = () => {
   return (
     <div className="mt-16 w-full flex flex-col items-center">
       { !addTaskModalOpen && !editTaskModalOpen && (
-        <>
-          <Button className='absolute right-20' onClick={() => setAddTaskModalOpen(true)}>Add Task</Button>
-          <div className='w-7/12'>
-            <h2 className='text-3xl mr-12'>Tasks</h2>
+        <div className='flex flex-col items-center w-full'>
+          <div className='w-11/12 md:w-7/12'>
+            <h2 className='text-3xl mr-12 text-center md:text-start'>Tasks</h2>
             {tasks && tasks.length > 0 ? 
               <TaskList 
                 tasks={tasks} 
@@ -38,7 +37,8 @@ const TasksPage = () => {
               <p className="mt-28 text-center text-2xl">No tasks found</p>
             }
           </div>
-        </>
+          <Button className='mt-8 lg:mt-0 lg:absolute right-40' onClick={() => setAddTaskModalOpen(true)}>Add Task</Button>
+        </div>
       )}
       { addTaskModalOpen && (
         <Modal

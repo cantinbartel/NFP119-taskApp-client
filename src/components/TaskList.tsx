@@ -36,8 +36,8 @@ const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskList
       <tbody>
         {tasks?.map((task: Task) => (
           <tr key={task._id} className="bg-gray-100 hover:bg-gray-50 border border-gray-200">
-            <td className="px-2 text-left py-2 w-1/2">{task.title}</td>
-            <td className={`px-2 text-left ${task?.completed ? 'text-sky-600' : 'text-red-400'}`}>{task?.completed ? 'completed' : 'pending'}</td>
+            <td className="px-2 text-left py-2 w-1/3 sm:w-1/2">{task.title}</td>
+            <td className={`px-2 text-left ${task?.completed ? 'text-sky-600' : 'text-red-400'} w-1/5 sm:w-auto`}>{task?.completed ? 'completed' : 'pending'}</td>
             <td className="px-2 text-left">
               <Link to={`/tasks/${task._id}`}>
                 <button className="px-2 py-1 mx-auto cursor-pointer">Details</button>
@@ -45,10 +45,10 @@ const TaskList = ({ tasks, selectedTask, select, edit, handleRefresh }: TaskList
             </td>
             <td>
               <button 
-                className='mt-2 text-sky-600 hover:text-sky-700' 
+                className='mt-2 mr-2 sm:mr-0  text-sky-600 hover:text-sky-700' 
                 onClick={() => handleSelection(task)}>{<MdEdit />}</button>
             </td>
-            <td>
+            <td className='mr-2 sm:mr-0'>
               <button 
                 className='mt-2 text-sky-600 hover:text-sky-700' 
                 onClick={() => handleDelete(task)}>{<MdDelete />}</button>    

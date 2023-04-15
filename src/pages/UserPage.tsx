@@ -38,9 +38,8 @@ const UserPage = () => {
         <div className="mt-16 w-full flex flex-col items-center relative">
             { !addTaskModalOpen && !editTaskModalOpen && (
                 <>
-                    <Button className='absolute right-20' onClick={() => setAddTaskModalOpen(true)}>Add Task</Button>
-                    <div className='w-7/12'>
-                        <p className='text-3xl capitalize mr-12'>{user?.name ? user.name : `User - ${id}`}</p>
+                    <div className='w-11/12 md:w-3/4 lg:w-8/12 xl:w-7/12'>
+                        <p className='text-3xl capitalize text-center md:text-start'>{user?.name ? user.name : `User - ${id}`}</p>
                         {tasks && tasks.length > 0 ? 
                             <TaskList 
                                 tasks={tasks} 
@@ -51,6 +50,7 @@ const UserPage = () => {
                             <p className="mt-28 text-center text-2xl">No tasks found</p>
                         }
                     </div>
+                    <Button className='mt-8 lg:mt-0 lg:absolute right-20' onClick={() => setAddTaskModalOpen(true)}>Add Task</Button>
                 </>
             )}
             { addTaskModalOpen && (

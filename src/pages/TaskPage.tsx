@@ -9,7 +9,6 @@ import Button from '../components/Button';
 
 const TaskPage = () => {
   const [task, setTask] = useState<Task>();
-  const [selectedTask, setSelectedTask] = useState<Task>();
   const [refresh, setRefresh] = useState<number>(0);
   const [editTaskModalOpen, setEditTaskModalOpen] = useState(false);
   const { id } = useParams();
@@ -23,12 +22,11 @@ const TaskPage = () => {
   }, [refresh]);
 
   return (
-    <div className='w-full flex justify-center relative mt-16'>
+    <div className='w-full h-screen flex justify-center relative mt-16'>
       { !editTaskModalOpen && (
-        <>
-          <Button className='absolute right-40' onClick={() => setEditTaskModalOpen(true)}>Edit Task</Button>
+        <div className='flex flex-col items-center w-full'>
           { task ? (
-              <div className='w-5/12 flex flex-col border-2 mt-14 py-6 rounded shadow-lg'>
+              <div className='w-11/12 sm:w-8/12 md:w-7/12 lg:5/12 flex flex-col border-2 mt-0 sm:mt-14 py-6 rounded shadow-lg'>
                 <p className='text-2xl font-semiboldr text-center font-medium pt-4'>{task?.title}</p>
                 <p className="px-12 pt-8 font-medium">Description: </p>
                 <p className="px-12 py-2">{task?.description ? task.description : 'No description'}</p>
@@ -43,7 +41,8 @@ const TaskPage = () => {
               </div>
             ) : <p className="mt-40 text-3xl">Task not found...</p> 
           }
-        </>
+          <Button className='mt-8 lg:mt-0 lg:absolute right-40' onClick={() => setEditTaskModalOpen(true)}>Edit Task</Button>
+        </div>
       )}
       { editTaskModalOpen && (
         <Modal

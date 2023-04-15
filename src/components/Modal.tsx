@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => (
   <>
     {isOpen && (
       <div className="bg-white w-screen h-screen z-10 flex justify-center">
-        <div className="w-7/12 flex flex-col relative">
+        <div className="w-11/12 sm:w-3/4 lg:w-8-12 xl:w-7/12 flex flex-col relative">
         <MdClose 
           className="absolute right-0 text-3xl font-bold text-sky-700 cursor-pointer hover:scale-105"
           onClick={onClose} />
